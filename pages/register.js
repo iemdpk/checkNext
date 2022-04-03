@@ -16,7 +16,7 @@ export default function Home() {
 
     var router = useRouter();
 
-const [phone,setPhone] = useState();
+const [phoneNumber,setPhone] = useState();
 
 var [daysLeft,setDaysLeft] = useState();
 
@@ -34,8 +34,22 @@ console.log(Difference_In_Days);
 setDaysLeft(String(Difference_In_Days).slice(0,2));
 },[]);
 
-function check(){
-    router.push("/secondPage");
+function send(){
+
+  if(phoneNumber != ""){
+try{
+  fetch("https://ekshvaramessagegateway.ekshvara.com/sendMsg.php?number="+phoneNumber+"&otp=SUB&message=Thank%20you%20for%20downloading%20Prathistha.%22https://pratistha.ekshvara.com/Android/v1Guardian/Prathistha-Guardian.apk%22%20Team%20Prathistha",{mode: 'no-cors'}).then((sendMsg)=>{
+    alert("You have been sent a download link. Please use it to add a child");
+    setPhone("");
+  });
+}
+catch(err){
+  alert("You have been sent a download link. Please use it to add a child");
+}
+  }
+  else{
+    alert("Please Enter your Number");
+  }
 }
 
   return (
@@ -50,22 +64,20 @@ function check(){
 <div style={{textAlign:'center'}}  className="text-center">
 <Image style={{borderRadius:'50px'}} height={180} width={180} src={logo} />
  
-<h5  style={{fontSize:15,marginTop:10}} className='text-white'>3 Month Free Subcription({daysLeft} Days Left)</h5>
+<h5  style={{fontSize:15,marginTop:10}} className='text-white'>Free Subcription({daysLeft} Days Left)</h5>
 &nbsp;
 <div style={{textAlign:'center'}}>
 <PhoneInput
-disableCountryCode={true}
-disableDropdown={true}
       placeholder="Enter phone number"
       country="IN"
       value={"+91"}
-      onChange={(val)=>{  }}
+      onChange={(val)=>{ setPhone(String(val).slice(2,15)); }}
       buttonStyle={{height:35,width:40,backgroundColor:'#FFBED8'}}
       inputStyle={{fontSize:20,fontFamily:'Signika'}}
     />
     </div>
 <h5 style={{color:'#474848'}}>.</h5>
-<Button style={{backgroundColor:'#FFBED8',borderWidth:0,color:'#474848',fontWeight:'bold'}} size="md">
+<Button onClick={send} style={{backgroundColor:'#FFBED8',borderWidth:0,color:'#474848',fontWeight:'bold'}} size="md">
     Send Link
 </Button>
 <h5 style={{color:'#474848'}}>.</h5>
