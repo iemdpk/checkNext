@@ -16,7 +16,7 @@ const [phone,setPhone] = useState();
 
 function check(){
   $(".next").fadeOut();
-  router.push("/secondPage");
+  router.replace("/secondPage");
 }
 
   return (

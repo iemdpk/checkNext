@@ -20,10 +20,8 @@ const [phone,setPhone] = useState();
 var item = setTimeout(()=>{
 
   $(document).ready(function(){
-    $(".next").mouseover(function(){
-    //   $(".next").fadeOut();
-     
-    });
+    $('.MainSplash').fadeOut();
+    router.replace('./register');
   });
 
 },2000);
@@ -41,10 +39,12 @@ function check(){
       </Head>
 
       <main>
+          <div className='MainSplash'>
 <Image style={{borderRadius:'10px'}} height={200} width={200} src={logo} />
 <div className="text-center">
 <h1></h1>
 <h1 className='text-white'>Prathistha</h1>
+</div>
 </div>
 </main>
      
